@@ -8,13 +8,14 @@
 
 
 <p align="center">
-  <img width="925" alt="Το πρόγραμμα όπως το βλέπουν μαθητές και γονείς" src="...."><br>
+  <img width="1077" alt="Το πρόγραμμα όπως το βλέπουν μαθητές και γονείς" src="https://github.com/user-attachments/assets/057ef042-b6c0-45a9-a513-a7ceaaead669"><br>
   <em>Εικ.1 Το πρόγραμμα όπως το βλέπουν μαθητές και γονείς.</em>
 </p>
 <br>
 <br>
 <p align="center">
-  <img width="832" alt="Η σελίδα για τους καθηγητές, με τη φόρμα δήλωσης" src="..."><br>
+# Draseis Planner
+  <img width="646" alt="Η σελίδα για τους καθηγητές, με τη φόρμα δήλωσης" src="https://github.com/user-attachments/assets/631b02f0-a0ac-4a68-83ef-cd2e81d4245c"><br>
   <em>Εικ.2 Η σελίδα για τους καθηγητές, με τη φόρμα δήλωσης.</em>
 </p>
 <br>
