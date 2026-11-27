@@ -1,0 +1,285 @@
+/* Πρόγραμμα Δράσεων – χρώματα από το θέμα Astra του site */
+.g5d {
+	--g5d-ink: #1e293b;
+	--g5d-text: #334155;
+	--g5d-muted: #64748b;
+	--g5d-accent: #046bd2;
+	--g5d-accent-dark: #00468b;
+	--g5d-chip-bg: #e8f1fb;
+	--g5d-line: #e2e8f0;
+	--g5d-row-line: #eef2f6;
+	--g5d-next-bg: #f4f8fd;
+	color: var(--g5d-text);
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+}
+
+.g5d [hidden] { display: none !important; }
+.g5d:not(.g5d-show-past) .g5d-row.is-past { display: none; }
+
+/* Εργαλειοθήκη */
+.g5d-toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	padding-bottom: 24px;
+	border-bottom: 1px solid var(--g5d-line);
+}
+.g5d-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.g5d-filters-label { font-size: 14px; font-weight: 600; color: var(--g5d-ink); margin-right: 4px; }
+
+.g5d .g5d-filter,
+.g5d .g5d-toggle-past {
+	min-height: 44px;
+	margin: 0;
+	padding: 0 16px;
+	border-radius: 999px;
+	font: inherit;
+	font-size: 15px;
+	line-height: 1;
+	cursor: pointer;
+	box-shadow: none;
+	transition: background-color .15s, color .15s, border-color .15s;
+}
+.g5d .g5d-filter {
+	min-width: 56px;
+	font-weight: 600;
+	background: #fff;
+	color: var(--g5d-accent-dark);
+	border: 1px solid #cbd5e1;
+}
+.g5d .g5d-filter:hover { border-color: var(--g5d-accent); background: #fff; color: var(--g5d-accent-dark); }
+.g5d .g5d-filter[aria-pressed="true"] { background: var(--g5d-accent); color: #fff; border-color: var(--g5d-accent); }
+.g5d .g5d-toggle-past {
+	background: #fff;
+	color: var(--g5d-text);
+	border: 1px solid #cbd5e1;
+	font-size: 14px;
+}
+.g5d .g5d-toggle-past:hover { border-color: var(--g5d-accent); background: #fff; color: var(--g5d-text); }
+.g5d .g5d-filter:focus-visible,
+.g5d .g5d-toggle-past:focus-visible { outline: 2px solid var(--g5d-accent); outline-offset: 2px; }
+
+/* Μήνες */
+.g5d-month { display: flex; flex-direction: column; gap: 4px; }
+.g5d-month-head { display: flex; align-items: baseline; gap: 12px; padding-bottom: 8px; }
+.g5d .g5d-month-title { margin: 0; font-size: 22px; line-height: 1.3; font-weight: 600; color: var(--g5d-accent-dark); }
+.g5d-count { font-size: 14px; color: var(--g5d-muted); }
+
+/* Γραμμές πίνακα (υπολογιστής) */
+.g5d-row {
+	display: grid;
+	grid-template-columns: 60px 110px minmax(0, 1fr);
+	grid-template-areas: "date time main";
+	gap: 16px;
+	align-items: start;
+	padding: 16px;
+	border-radius: 8px;
+	border-top: 1px solid var(--g5d-row-line);
+}
+.g5d-row.is-past { opacity: .55; }
+.g5d-row.is-next { background: var(--g5d-next-bg); box-shadow: inset 4px 0 0 var(--g5d-accent); }
+
+.g5d-date { grid-area: date; display: flex; flex-direction: column; align-items: center; line-height: 1.1; padding: 6px 0; background: var(--g5d-chip-bg); border-radius: 6px; }
+.g5d-day { font-size: 26px; font-weight: 700; color: var(--g5d-ink); }
+.g5d-wd { font-size: 13px; font-weight: 600; color: var(--g5d-muted); }
+.g5d-mo { font-size: 12px; font-weight: 600; color: var(--g5d-accent-dark); }
+.g5d-time { grid-area: time; font-size: 15px; padding-top: 4px; }
+.g5d-main { grid-area: main; display: flex; flex-direction: column; gap: 4px; padding-top: 2px; min-width: 0; }
+.g5d-titleline { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.g5d-title { font-size: 16px; font-weight: 600; line-height: 1.35; color: var(--g5d-ink); overflow-wrap: anywhere; }
+.g5d-more { margin-top: 8px; }
+.g5d-more summary {
+	display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px;
+	border: 1px solid #cbd5e1; border-radius: 999px; background: #fff;
+	cursor: pointer; font-size: 14px; font-weight: 600; color: var(--g5d-accent-dark); list-style: none;
+	transition: border-color .15s;
+}
+.g5d-more summary:hover { border-color: var(--g5d-accent); }
+.g5d-more summary:focus-visible { outline: 2px solid var(--g5d-accent); outline-offset: 2px; }
+.g5d-more summary::-webkit-details-marker { display: none; }
+.g5d-more summary::before { content: "+ "; }
+.g5d-more[open] summary::before { content: "− "; }
+.g5d-more .g5d-extra { margin-top: 8px; }
+.g5d-extra { margin: 6px 0 0; padding: 0; display: flex; flex-direction: column; gap: 2px; font-size: 14px; text-align: left; }
+/* Υπολογιστής: ετικέτα αριστερά, τιμή δεξιά. */
+.g5d-extra > div { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 12px; align-items: start; margin: 0; padding: 4px 0; border-top: 1px solid var(--g5d-row-line); }
+.g5d-extra dt { margin: 0; padding: 0; font-weight: 600; color: var(--g5d-muted); text-align: left; }
+.g5d-extra dd { margin: 0; padding: 0; min-width: 0; color: var(--g5d-ink); text-align: left; text-align-last: left; overflow-wrap: anywhere; }
+/* Κινητό: ετικέτα πάνω, τιμή σε όλο το πλάτος. */
+@media (max-width: 700px) {
+	.g5d-extra { gap: 10px; }
+	.g5d-extra > div { display: flex; flex-direction: column; gap: 2px; padding: 0; border-top: 0; }
+	.g5d-extra dt { font-size: 12px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; color: var(--g5d-accent); }
+	.g5d-extra dd { font-size: 15px; }
+}
+
+.g5d-badge { display: none; font-size: 12px; font-weight: 700; line-height: 1.5; border-radius: 999px; padding: 1px 10px; }
+.g5d-row.is-next .g5d-badge-next { display: inline-block; color: #92400e; background: #fef3c7; }
+.g5d-row.is-past .g5d-badge-past { display: inline-block; color: #475569; background: #f1f5f9; }
+
+.g5d .g5d-empty { margin: 0; padding: 32px; text-align: center; color: var(--g5d-muted); background: #f8fafc; border-radius: 8px; }
+.g5d .g5d-updated { margin: 0; font-size: 13px; color: var(--g5d-muted); }
+.g5d .g5d-notice { margin: 0; padding: 12px 16px; font-size: 14px; color: #7c2d12; background: #fff7ed; border: 1px solid #fed7aa; border-radius: 8px; }
+.g5d-error { padding: 16px; color: #7c2d12; background: #fff7ed; border-radius: 8px; }
+
+/* Φόρμα σύνδεσης (κοινός κωδικός) */
+.g5d-gate { gap: 16px; max-width: 480px; margin: 0 auto; padding-top: 32px; text-align: center; }
+.g5d-gate-form { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; }
+.g5d-gate-form label { font-weight: 600; color: var(--g5d-ink); }
+.g5d-gate-form input[type="password"] { width: 180px; max-width: 100%; box-sizing: border-box; min-height: 40px; min-width: 0; padding: 0 12px; border: 1px solid #cbd5e1; border-radius: 8px; font: inherit; }
+
+/* Κουμπί εισόδου εκπαιδευτικού κάτω από τον πίνακα */
+.g5d-cta { margin: 8px 0 0; padding-top: 24px; border-top: 1px solid var(--g5d-line); text-align: center; }
+/* Ίδιο στυλ για τον σύνδεσμο κάτω από τον πίνακα και το κουμπί της φόρμας.
+   Οι επιλογείς είναι αρκετά συγκεκριμένοι ώστε να υπερισχύουν του θέματος Astra (υπογράμμιση συνδέσμων). */
+/* Τα βασικά στυλ είναι !important επειδή το θέμα και το plugin προσβασιμότητας του site
+   έχουν δικούς τους κανόνες για συνδέσμους και κουμπιά. */
+.g5d-cta a.g5d-btn,
+.g5d-proposal button.g5d-btn {
+	display: inline-flex !important;
+	align-items: center;
+	gap: 6px;
+	padding: 7px 14px !important;
+	border: 0 !important;
+	box-shadow: inset 0 0 0 1px #1d6a84 !important;
+	border-radius: 8px !important;
+	background: #fff !important;
+	color: #1d6a84 !important;
+	font-family: inherit;
+	font-size: 14px !important;
+	font-weight: 600 !important;
+	text-decoration: none !important;
+	line-height: 1.2 !important;
+	cursor: pointer;
+}
+.g5d-cta a.g5d-btn:hover,
+.g5d-proposal button.g5d-btn:hover {
+	background: #e1eff3 !important;
+}
+
+.g5d-proposal .g5d-actions .g5d-btn {
+	height: 46px;
+	padding: 0 28px !important;
+	font-size: 15px !important;
+	border-radius: 10px !important;
+	box-sizing: border-box;
+}
+.g5d-proposal .g5d-actions .g5d-btn-primary {
+	background: #1d6a84 !important;
+	color: #fff !important;
+}
+.g5d-proposal .g5d-actions .g5d-btn-primary:hover {
+	background: #175a70 !important;
+}
+
+.g5d-proposal .g5d-actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 24px;
+	width: 100%;
+	text-align: center;
+}
+@media (max-width: 700px) {
+	.g5d-proposal .g5d-actions {
+		gap: 16px;
+		margin-top: 8px;
+	}
+}
+
+.g5d .g5d-deadline {
+	margin: 16px 0 4px;
+	text-align: center;
+	font-size: 14px !important;
+	color: var(--g5d-muted);
+}
+.g5d .g5d-deadline strong { color: var(--g5d-ink); }
+.g5d .g5d-notes { display: flex; flex-direction: column; gap: 4px; }
+.g5d .g5d-notes .g5d-deadline, .g5d .g5d-overlap { margin: 0; }
+.g5d .g5d-overlap a { color: var(--g5d-accent-dark, #1d6a84); }
+.g5d-credit { font-size: 9px !important; line-height: 1.4 !important; margin: 0 !important; padding: 0 !important; text-align: right !important; color: #5d6f74 !important; }
+.g5d-credit a { color: #1d6a84 !important; text-decoration: underline !important; text-underline-offset: 2px; }
+.g5d-credit a:hover { color: #14485a !important; }
+.g5d-credit-host { position: relative !important; }
+/* Θέμα χωρίς <article>: το υποσέλιδο μένει στη ροή, με απόσταση από το περιεχόμενο. */
+.g5d-credit:not(.g5d-credit-corner) { margin-top: 60px !important; }
+@media (max-width: 700px) { .g5d-credit:not(.g5d-credit-corner) { margin-top: 28px !important; } }
+.g5d-credit.g5d-credit-corner { position: absolute !important; right: 12px !important; bottom: 6px !important; white-space: nowrap; }
+/* Σε στενή οθόνη η γραμμή μπαίνει στη ροή και αλλάζει γραμμή, ώστε να μην κόβεται ούτε να καλύπτει τον πίνακα. */
+@media (max-width: 700px) {
+  .g5d-credit.g5d-credit-corner { position: static !important; white-space: normal; margin: 28px 12px 8px !important; }
+  .g5d-credit a { display: inline-block; padding: 6px 0 !important; }
+}
+
+/* Φόρμα υποβολής πρότασης */
+.g5d-form { max-width: 720px; }
+.g5d-proposal { display: flex; flex-direction: column; gap: 16px; }
+.g5d .g5d-sub { margin: 0; text-align: center; font-size: 14px; color: var(--g5d-muted); }
+.g5d-req { color: #b42318; }
+.g5d-proposal .g5d-sec { display: flex; flex-direction: column; gap: 16px; }
+.g5d-proposal .g5d-sec + .g5d-sec { margin-top: 16px; }
+.g5d-proposal .g5d-sec-title { margin: 0; padding: 10px 16px; background: #e6f2f6; font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #1d6a84; }
+.g5d-proposal label { display: block; font-weight: 600; font-size: 14px; color: var(--g5d-ink); }
+.g5d-proposal label > input:not([type="checkbox"]),
+.g5d-proposal label > select,
+.g5d-proposal label > textarea { display: block; width: 100%; box-sizing: border-box; margin-top: 6px; }
+.g5d-proposal label > .g5d-hint { display: block; margin-top: 6px; }
+.g5d-proposal input[type="text"],
+.g5d-proposal input[type="date"],
+.g5d-proposal input[type="number"],
+.g5d-proposal textarea { padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font: inherit; font-weight: 400; color: var(--g5d-text); background: #fff; }
+.g5d-proposal select { min-height: 44px; padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font: inherit; font-weight: 400; color: var(--g5d-text); background: #fff; }
+.g5d-proposal textarea { min-height: 96px; }
+.g5d-proposal textarea.g5d-one { min-height: 44px; resize: vertical; }
+.g5d-proposal > .g5d-btn { align-self: center; }
+.g5d-proposal .g5d-hint { margin: 0; font-size: 13px; font-weight: 400; color: var(--g5d-muted); }
+.g5d-proposal .g5d-two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.g5d-proposal .g5d-grades { border: 0; margin: 0; padding: 0; min-width: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.g5d-proposal .g5d-grades label:first-of-type { width: 100%; justify-content: center; font-weight: 600; }
+.g5d-proposal .g5d-grades legend { font-weight: 600; color: var(--g5d-ink); margin-bottom: 8px; }
+.g5d-proposal .g5d-grades label { display: flex; flex-direction: row; align-items: center; gap: 6px; height: 28px; padding: 0 10px; box-sizing: border-box; border: 1px solid #b9c7ce; border-radius: 8px; background: #fff; font-weight: 400; cursor: pointer; }
+.g5d-proposal .g5d-grades label:has(input:checked) { border-color: #1d6a84; background: #e6f2f6; }
+.g5d-proposal .g5d-grades input { accent-color: #1d6a84; width: 16px; height: 16px; margin: 0; }
+.g5d-notice-ok { color: #14532d; background: #f0fdf4; border-color: #bbf7d0; }
+@media (max-width: 700px) {
+	.g5d-proposal .g5d-two { grid-template-columns: 1fr; }
+}
+
+/* Κινητό / στενές οθόνες: κάρτες */
+@media (max-width: 700px) {
+	.g5d { gap: 20px; }
+	.g5d-toolbar { flex-direction: column; align-items: flex-start; gap: 12px; padding-bottom: 16px; }
+	.g5d-filters-label { width: 100%; }
+	.g5d .g5d-month-title { font-size: 19px; }
+	.g5d-month { gap: 10px; }
+	.g5d-row {
+		grid-template-columns: 52px minmax(0, 1fr);
+		grid-template-areas:
+			"date time"
+			"date main";
+		gap: 6px 12px;
+		padding: 12px;
+		border: 1px solid var(--g5d-line);
+		background: #fff;
+	}
+	.g5d-row.is-next { border-color: var(--g5d-accent); background: #fff; }
+	.g5d-date {
+		align-self: start;
+		align-items: center;
+		justify-content: center;
+		gap: 2px;
+		padding: 8px 0;
+		background: var(--g5d-chip-bg);
+		border-radius: 6px;
+	}
+	.g5d-day { font-size: 22px; color: var(--g5d-accent-dark); }
+	.g5d-wd { font-size: 11px; font-weight: 700; color: var(--g5d-accent-dark); }
+	.g5d-mo { font-size: 10px; font-weight: 700; color: var(--g5d-accent-dark); }
+	.g5d-time { font-size: 13px; padding-top: 0; color: #475569; }
+	.g5d-title { font-size: 16px; }
+}
