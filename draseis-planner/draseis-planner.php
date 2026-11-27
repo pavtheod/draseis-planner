@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Draseis Planner
  * Description:       Οι εκπαιδευτικοί υποβάλλουν προτάσεις για σχολικές δράσεις, ο διευθυντής τις εγκρίνει με ένα κλικ από το email και οι εγκεκριμένες εμφανίζονται σε πρόγραμμα στη σελίδα του σχολείου. Shortcodes: [draseis_planner], [draseis_form]
- * Version:           1.5.0
+ * Version:           1.5.1
  * Author:            5ο Γυμνάσιο Χανίων
  * Requires at least: 6.0
  * Requires PHP:      7.4
@@ -15,11 +15,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'G5D_VERSION', '1.5.0' );
+define( 'G5D_VERSION', '1.5.1' );
 define( 'G5D_OPT', 'g5d_settings' );
-define( 'G5D_TRANSIENT', 'g5d_events' );
-define( 'G5D_BACKUP', 'g5d_events_backup' );
-define( 'G5D_LAST_ERROR', 'g5d_last_error' );
 define( 'G5D_COOKIE', 'g5d_access' );
 define( 'G5D_ACCESS_HOURS', 4 );
 

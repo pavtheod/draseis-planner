@@ -162,8 +162,7 @@ function g5d_logout_action() {
 }
 
 /**
- * Shortcode [g5d_proposals]: φόρμα σύνδεσης με τον κοινό κωδικό.
- * Η ίδια η φόρμα υποβολής θα μπει εδώ μετά την έγκριση του σχεδίου.
+ * Η σελίδα εισόδου καθηγητών (κοινός κωδικός ή ΠΣΔ). Τη δείχνει η φόρμα [draseis_form] σε όσους δεν έχουν πρόσβαση.
  */
 function g5d_gate_shortcode( $atts ) {
 	if ( ! defined( 'DONOTCACHEPAGE' ) ) {
@@ -225,7 +224,6 @@ function g5d_gate_shortcode( $atts ) {
 	return ob_get_clean();
 }
 
-add_shortcode( 'g5d_proposals', 'g5d_gate_shortcode' );
 add_action( 'admin_post_g5d_login', 'g5d_login_action' );
 add_action( 'admin_post_nopriv_g5d_login', 'g5d_login_action' );
 add_action( 'admin_post_g5d_logout', 'g5d_logout_action' );

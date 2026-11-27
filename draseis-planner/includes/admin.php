@@ -186,7 +186,6 @@ function g5d_sanitize( $input ) {
 	return array(
 		'code'          => $code,
 		'code_ver'      => $code_ver,
-		'api_key'       => sanitize_text_field( isset( $input['api_key'] ) ? $input['api_key'] : '' ),
 		'calendar_id'   => sanitize_text_field( isset( $input['calendar_id'] ) ? $input['calendar_id'] : '' ),
 		'cache_minutes' => min( 1440, max( 1, absint( isset( $input['cache_minutes'] ) ? $input['cache_minutes'] : 15 ) ) ),
 		'form_url'      => isset( $input['form_url'] ) ? esc_url_raw( trim( $input['form_url'] ) ) : '',
@@ -328,14 +327,6 @@ function g5d_admin_init() {
 	register_setting( 'g5d_show_group', 'g5d_show', array( 'sanitize_callback' => 'g5d_sanitize_show', 'default' => array() ) );
 }
 add_action( 'admin_init', 'g5d_admin_init' );
-
-// Όταν αλλάζουν οι ρυθμίσεις, η επόμενη προβολή παίρνει φρέσκα δεδομένα.
-add_action(
-	'update_option_' . G5D_OPT,
-	function () {
-		delete_transient( G5D_TRANSIENT );
-	}
-);
 
 function g5d_admin_menu() {
 	add_menu_page( 'Draseis Planner', 'Draseis Planner', 'manage_options', 'g5d', 'g5d_admin_page', 'dashicons-calendar-alt', 30 );
@@ -505,6 +496,12 @@ function g5d_admin_tab_settings() {
 	list( , $bad )       = g5d_parse_holidays( $s['holidays'], $sy );
 	list( , $bad_local ) = g5d_parse_holidays( $s['holidays_local'], $sy );
 	settings_errors( 'g5d' );
+	// Το παλιό shortcode [g5d_proposals] καταργήθηκε στην 1.5.1: αν το έχει κάποια σελίδα, το λέμε.
+	foreach ( get_posts( array( 'post_type' => array( 'page', 'post' ), 'post_status' => array( 'publish', 'draft', 'private' ), 'numberposts' => 20, 's' => 'g5d_proposals' ) ) as $old_p ) {
+		if ( false !== strpos( (string) $old_p->post_content, '[g5d_proposals' ) ) {
+			echo '<div class="notice notice-warning inline" style="max-width:1100px"><p>Η σελίδα <a href="' . esc_url( get_edit_post_link( $old_p->ID ) ) . '">' . esc_html( get_the_title( $old_p ) ) . '</a> έχει το παλιό <code>[g5d_proposals]</code>, που δεν υποστηρίζεται πια. Αντικαταστήστε το με <code>[draseis_form]</code>.</p></div>';
+		}
+	}
 	if ( isset( $_GET['g5d_msg'] ) && 'holfilled' === $_GET['g5d_msg'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		echo '<div class="notice notice-success inline" style="max-width:780px"><p>Οι πανελλαδικές αργίες επαναφέρθηκαν για το σχολικό έτος ' . (int) $sy . '–' . ( (int) $sy + 1 ) . '.</p></div>';
 	}
@@ -736,13 +733,6 @@ function g5d_admin_tab_settings() {
 				<div>
 					<input type="text" id="g5d_calendar_id" class="large-text code" name="<?php echo $n; // phpcs:ignore WordPress.Security.EscapeOutput ?>[calendar_id]" value="<?php echo esc_attr( $s['calendar_id'] ); ?>">
 					<p class="description">Google Calendar → Ρυθμίσεις του ημερολογίου → «Ενσωμάτωση ημερολογίου» → «Αναγνωριστικό ημερολογίου».</p>
-				</div>
-			</div>
-			<div class="g5d-row">
-				<div class="g5d-lbl"><label for="g5d_api_key">Google API key</label></div>
-				<div>
-					<input type="text" id="g5d_api_key" class="regular-text code" name="<?php echo $n; // phpcs:ignore WordPress.Security.EscapeOutput ?>[api_key]" value="<?php echo esc_attr( $s['api_key'] ); ?>" autocomplete="off">
-					<p class="description">Χρειάζεται μόνο για την εισαγωγή των παλαιών δράσεων από το ημερολόγιο.</p>
 				</div>
 			</div>
 			<div class="g5d-row">
